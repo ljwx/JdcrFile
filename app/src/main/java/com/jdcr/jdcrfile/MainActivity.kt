@@ -16,16 +16,18 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.fragment.app.FragmentActivity
 import com.jdcr.jdcrfile.ui.theme.JdcrFileTheme
+import com.jdcr.jdcrlog.JdcrLog
 
 class MainActivity : FragmentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        JdcrFilePermissionUtils.checkExternal(this@MainActivity)
+        JdcrLog.enable(true)
         setContent {
             JdcrFileTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
+                        this@MainActivity,
                         name = "Android",
                         modifier = Modifier.padding(innerPadding)
                     )
@@ -36,7 +38,7 @@ class MainActivity : FragmentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
+fun Greeting(activity: FragmentActivity, name: String, modifier: Modifier = Modifier) {
     val context = LocalContext.current
     Column {
         Text(
@@ -44,14 +46,14 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
             modifier = modifier
         )
         Button(onClick = {
-            if (!JdcrFilePermissionUtils.checkPermissionAll()) {
-                JdcrFilePermissionUtils.openSettings(context)
+            JdcrFilePermissionUtils.requestMaxStoragePermission(activity) {
+
             }
         }) {
             Text("判断权限")
         }
         Button(onClick = {
-            JdcrFileDirUtils.getRootDir(context)
+            JdcrFileDirUtils.test()
         }) {
             Text("获取根目录")
         }
@@ -63,9 +65,5 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 fun GreetingPreview() {
 
     JdcrFileTheme {
-        Column {
-            Greeting("Android")
-
-        }
     }
 }
