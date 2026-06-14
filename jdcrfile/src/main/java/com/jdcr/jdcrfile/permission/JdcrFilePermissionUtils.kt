@@ -1,6 +1,6 @@
-package com.jdcr.jdcrfile
+package com.jdcr.jdcrfile.permission
 
-import android.app.Activity
+import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -13,7 +13,6 @@ import androidx.fragment.app.FragmentActivity
 import com.jdcr.jdcrfile.util.JdcrFileLog
 import com.jdcr.jdcrpermission.JdcrPermission
 import com.jdcr.jdcrpermission.handler.JdcrOpenActionHandler
-
 
 object JdcrFilePermissionUtils {
 
@@ -29,11 +28,11 @@ object JdcrFilePermissionUtils {
             // Android 10 及以下，检查传统读写权限
             val read = ContextCompat.checkSelfPermission(
                 context,
-                android.Manifest.permission.READ_EXTERNAL_STORAGE
+                Manifest.permission.READ_EXTERNAL_STORAGE
             )
             val write = ContextCompat.checkSelfPermission(
                 context,
-                android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
             )
             (read == PackageManager.PERMISSION_GRANTED && write == PackageManager.PERMISSION_GRANTED).apply {
                 JdcrFileLog.i(
@@ -66,10 +65,10 @@ object JdcrFilePermissionUtils {
         } else {
             // Android 10 及以下：直接申请传统权限
             val legacyPermissions = arrayOf(
-                android.Manifest.permission.READ_EXTERNAL_STORAGE,
-                android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
             )
-            JdcrPermission.with(context).permissions(legacyPermissions.toList()).request {
+            JdcrPermission.Companion.with(context).permissions(legacyPermissions.toList()).request {
                 callback()
             }
         }

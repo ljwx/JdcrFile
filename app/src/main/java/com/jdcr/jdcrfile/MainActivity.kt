@@ -1,7 +1,6 @@
 package com.jdcr.jdcrfile
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Column
@@ -15,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.fragment.app.FragmentActivity
+import com.jdcr.jdcrfile.permission.JdcrFilePermissionUtils
 import com.jdcr.jdcrfile.ui.theme.JdcrFileTheme
 import com.jdcr.jdcrlog.JdcrLog
 
@@ -53,7 +53,7 @@ fun Greeting(activity: FragmentActivity, name: String, modifier: Modifier = Modi
             Text("判断权限")
         }
         Button(onClick = {
-            JdcrFileDirUtils.test()
+            JdcrFileUtils.test()
         }) {
             Text("获取根目录")
         }

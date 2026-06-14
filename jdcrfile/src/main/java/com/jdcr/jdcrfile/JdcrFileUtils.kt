@@ -5,7 +5,7 @@ import android.os.Environment
 import com.jdcr.jdcrfile.util.JdcrFileLog
 import java.io.File
 
-object JdcrFileDirUtils {
+object JdcrFileUtils {
 
     /**
      * 获取外置存储根目录
@@ -27,12 +27,12 @@ object JdcrFileDirUtils {
         }
     }
 
-    fun getCameraPath(): String {
+    fun getSystemCameraPath(): String {
         return getExternalStorageDir() + "/DCIM" + "/Camera"
     }
 
     fun test() {
-        val dir = getCameraPath()
+        val dir = getSystemCameraPath()
         val file = File(dir)
         file.listFiles()?.forEach {
             JdcrFileLog.i("媒体:"+it.name)
