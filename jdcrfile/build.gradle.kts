@@ -34,6 +34,6 @@ android {
 }
 
 dependencies {
-    api("com.github.ljwx.jdcrlog:jdcrlog-android:1.3.1-SNAPSHOT")
-    api("com.github.ljwx:JdcrPermissions:0.9.1-SNAPSHOT")
+    api(jdcr.jdcr.log)
+    api(jdcr.jdcr.permission)
 }
