@@ -36,4 +36,18 @@ android {
 dependencies {
     api(jdcr.jdcr.log)
     api(jdcr.jdcr.permission)
+    testImplementation(libs.junit)
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("release") {
+                from(components["release"])
+                groupId = "com.github.jdcr"
+                artifactId = "JdcrFile"
+                version = "0.3.0-SNAPSHOT"
+            }
+        }
+    }
 }
